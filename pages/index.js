@@ -53,18 +53,20 @@ const Home = ({data})=>{
        document.getElementById("spinner").removeAttribute("hidden")
     }
 
-  const handleLocalizacoes = (e) => {
+    const handleFirstLink = (e)=>{
+      e.preventDefault()
+      document.getElementById("spinner").removeAttribute("hidden")
+      window.location.replace("/estatisticas")
+     
+    }
+
+  const handleSecondLink = (e) => {
     e.preventDefault()
     document.getElementById("spinner").removeAttribute("hidden")
     window.location.replace("/localizacoes")
     
   }
-  const handleEstatisticas = (e)=>{
-    e.preventDefault()
-    document.getElementById("spinner").removeAttribute("hidden")
-    window.location.replace("/estatisticas")
-   
-  }
+
 
   if (data.length === 0){
     isEmpty = true;
@@ -90,10 +92,10 @@ const Home = ({data})=>{
             <a className="nav-link" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom" href=''>Cadastrar</a>
           </li>
           <li className="nav-item">
-           <a className="nav-link" href="" onClick={handleEstatisticas} >Estatísticas</a>
+           <a className="nav-link" href="" onClick={handleFirstLink}>Estatísticas</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href=""  onClick={handleLocalizacoes} >Localizações</a>
+            <a className="nav-link" href=""  onClick={handleSecondLink} >Localizações</a>
           </li>
         </ul>
       </div>

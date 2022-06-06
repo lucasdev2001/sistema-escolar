@@ -48,8 +48,9 @@ export default function Estatisticas({objetoNumeros}) {
         <p className="col-12 text-center lead">Quantidade de alunos por gênero</p>
         {isEmpty ? <p className="text-center">Humm.. Parece que ainda não há registros suficientes</p> : ""}
         <div className="w-50 d-flex justify-content-center col-12">
-        <Pie data={{labels: ['Mulheres','Homens'],
-  datasets: [
+        <Pie 
+        data={{labels: ['Mulheres','Homens'],
+      datasets: [
     {
       label: '# of pessoas ',
       data: [objetoNumeros.numeroMulheres,objetoNumeros.numeroHomens],
@@ -59,7 +60,6 @@ export default function Estatisticas({objetoNumeros}) {
     ],
       borderWidth: 1,
     },
-    
   ],}}/>
         </div>
 

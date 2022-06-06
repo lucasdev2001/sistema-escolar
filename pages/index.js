@@ -217,8 +217,8 @@ const Home = ({data})=>{
   </div>
   <Script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></Script>
   <Script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></Script>
-  <Script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerPolicy="no-referrer"></Script>
-  <Script src='scripts/maskScript.js'></Script>
+  <Script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" strategy="lazyOnload" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerPolicy="no-referrer"></Script>
+  <Script src='scripts/maskScript.js' strategy="lazyOnload"></Script>
     </>
     )
 }

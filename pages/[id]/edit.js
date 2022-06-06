@@ -1,7 +1,7 @@
-import { useRouter } from 'next/router';
-import { useState } from 'react';
-import Aluno from '../../models/Aluno';
-import dbConnect from '../../lib/dbConnect';
+import { useRouter } from 'next/router'
+import { useState } from 'react'
+import Aluno from '../../models/Aluno'
+import dbConnect from '../../lib/dbConnect'
 
 
 export default function Edit({aluno}){
@@ -49,7 +49,7 @@ const handleSubmit = (e) => {
 }
     return (
     <>
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="p-5">
         <div className="mb-3">
             <label className="form-label">Nome</label>
             <input type="text" className="form-control" name='nome' defaultValue={aluno.nome} onChange={handleChange}/>
@@ -70,7 +70,7 @@ const handleSubmit = (e) => {
             <label className="form-label">Telefone</label>
             <input type="text" className="form-control" name='telefone' defaultValue={aluno.telefone} onChange={handleChange}/>
         </div>
-        <button type="submit" className="btn btn-primary">Enviar</button>
+       <div className="text-center"><button type="submit" className="btn btn-primary">Alterar</button></div> 
     </form>
     </>
     )
@@ -79,10 +79,10 @@ const handleSubmit = (e) => {
 
 
 export async function getServerSideProps({params}) {
-    await dbConnect();
-    const aluno = await Aluno.findById(params.id).lean();
-    aluno._id = aluno._id.toString();
-    console.log(aluno.nome);
+    await dbConnect()
+    const aluno = await Aluno.findById(params.id).lean()
+    aluno._id = aluno._id.toString()
+    console.log(aluno.nome)
 
     return {props : { aluno }}
 }

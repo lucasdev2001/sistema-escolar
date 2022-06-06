@@ -16,6 +16,6 @@ const alunoSchema = new mongoose.Schema({
     telefone: {
         type: String
     },
-});
+})
 
-export default mongoose.models.Aluno || mongoose.model('Aluno',alunoSchema);
+export default mongoose.models.Aluno || mongoose.model('Aluno',alunoSchema)

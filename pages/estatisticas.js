@@ -1,15 +1,27 @@
-import React from 'react';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import { Pie } from 'react-chartjs-2';
-import dbConnect from '../lib/dbConnect';
-import Aluno from '../models/Aluno';
-import Link from 'next/link'
-
-
+import React from 'react'
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
+import { Pie } from 'react-chartjs-2'
+import dbConnect from '../lib/dbConnect'
+import Aluno from '../models/Aluno'
 
 export default function Estatisticas({objetoNumeros}) {
-    ChartJS.register(ArcElement, Tooltip, Legend);
-    console.log(objetoNumeros.numeroMulheres);
+  let isEmpty = false;
+  
+  const handleFirstLink = (e) => {
+    e.preventDefault()
+    window.location.replace("/")
+  }
+
+  const handleSecondLink = (e) => {
+    e.preventDefault()
+    window.location.replace("/localizacoes")
+  }
+
+  if (objetoNumeros.numeroHomens === 0 && objetoNumeros.numeroMulheres === 0){
+    isEmpty = true;
+  }
+
+    ChartJS.register(ArcElement, Tooltip, Legend)
     return (
     <>
 <nav className="navbar navbar-expand-lg bg-light">
@@ -20,14 +32,11 @@ export default function Estatisticas({objetoNumeros}) {
       </button>
       <div className="collapse navbar-collapse justify-content-center text-center" id="navbarNav">
         <ul className="navbar-nav">
-          <li className="nav-item">
-            <Link href="/alunos"><a className="nav-link">Alunos</a></Link>
+        <li className="nav-item">
+            <a className="nav-link" href='' onClick={handleFirstLink}>início</a>
           </li>
           <li className="nav-item">
-            <Link href="/localizacoes"><a className="nav-link">Localizações</a></Link>
-          </li>
-          <li className="nav-item">
-          <a className="nav-link" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom" href=''>Início</a>
+            <a href="" onClick={handleSecondLink} className="nav-link">Localizações</a>
           </li>
         </ul>
       </div>
@@ -36,6 +45,7 @@ export default function Estatisticas({objetoNumeros}) {
       <main>
         <div className = "container-fluid d-flex justify-content-center text center row">
         <p className="col-12 text-center lead">Quantidade de alunos por gênero</p>
+        {isEmpty ? <p className="text-center">Humm.. Parece que ainda não há registros suficientes</p> : ""}
         <div className="w-50 d-flex justify-content-center col-12">
         <Pie data={{labels: ['Mulheres','Homens'],
   datasets: [
@@ -81,7 +91,7 @@ export async function getServerSideProps() {
      numeroHomens: data1.length
    }
 
-   console.log(objetoNumeros);
+   console.log(objetoNumeros)
   
     return { props: { objetoNumeros } }
   }

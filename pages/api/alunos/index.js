@@ -1,5 +1,5 @@
-import dbConnect from "../../../lib/dbConnect";
-import Aluno from "../../../models/Aluno";
+import dbConnect from "../../../lib/dbConnect"
+import Aluno from "../../../models/Aluno"
 export default async function handler (req,res){
     const {method} = req
     await dbConnect()

@@ -3,6 +3,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { Pie } from 'react-chartjs-2'
 import dbConnect from '../lib/dbConnect'
 import Aluno from '../models/Aluno'
+import Script from 'next/script'
 
 export default function Estatisticas({objetoNumeros}) {
   let isEmpty = false;
@@ -66,6 +67,7 @@ export default function Estatisticas({objetoNumeros}) {
         
         </div>
       </main>
+      <Script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></Script>
     </>
     )
 }
@@ -91,7 +93,6 @@ export async function getServerSideProps() {
      numeroHomens: data1.length
    }
 
-   console.log(objetoNumeros)
   
     return { props: { objetoNumeros } }
   }

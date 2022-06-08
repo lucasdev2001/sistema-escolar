@@ -48,11 +48,6 @@ const Home = ({ data }) => {
     }
   }
 
-  function SomeScript(params) {
-    console.log('this is a secret embeded script')
-    return <h1> Hello {params.name} </h1>
-  }
-
   const handleSubmit = (e) => {
     e.preventDefault()
     postData(form)

@@ -1,27 +1,30 @@
-import { useRouter } from "next/router"
-import { useState } from "react"
-import Aluno from "../../models/Aluno"
-import dbConnect from "../../lib/dbConnect"
+import { useRouter } from "next/router";
+import { useState } from "react";
+import Aluno from "../../models/Aluno";
+import dbConnect from "../../lib/dbConnect";
+import Spinner from "../../components/Spinner";
 
 export default function Edit({ aluno }) {
-  const router = useRouter()
-  const { id } = router.query
+  const router = useRouter();
+  const { id } = router.query;
   const [form, setForm] = useState({
     nome: String,
     cpf: String,
     sexo: String,
     email: String,
-    telefone: String
-  })
+    telefone: String,
+  });
+
+  const [isLoading, setLoading] = useState(false);
 
   const handleChange = (e) => {
-    const value = e.target.value
-    const name = e.target.name
+    const value = e.target.value;
+    const name = e.target.name;
     setForm({
       ...form,
-      [name]: value
-    })
-  }
+      [name]: value,
+    });
+  };
 
   const putData = async (form) => {
     try {
@@ -29,22 +32,33 @@ export default function Edit({ aluno }) {
         method: "PUT",
         headers: {
           Accept: "application/json",
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(form)
-      })
-      router.push("/")
+        body: JSON.stringify(form),
+      });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    putData(form)
-  }
+    e.preventDefault();
+    putData(form);
+    window.location.replace("/");
+  };
+
+  const handleClick = () => {
+    setLoading(true);
+  };
   return (
     <>
+      <div className="alert alert-warning m-3 rounded-3 p-5" role="alert">
+        <p className="lead text-center">
+          Atenção! A máscara de formulário esta desativada nesta página, edite
+          com cuidado!
+        </p>
+      </div>
+
       <form onSubmit={handleSubmit} className="p-5">
         <div className="mb-3">
           <label className="form-label">Nome</label>
@@ -97,19 +111,26 @@ export default function Edit({ aluno }) {
           />
         </div>
         <div className="text-center">
-          <button type="submit" className="btn btn-primary">
+          <button
+            type="submit"
+            className="btn btn-primary"
+            onClick={handleClick}
+          >
             Alterar
           </button>
+          <br />
+          <br />
+          {isLoading ? <Spinner /> : ""}
         </div>
       </form>
     </>
-  )
+  );
 }
 
 export async function getServerSideProps({ params }) {
-  await dbConnect()
-  const aluno = await Aluno.findById(params.id).lean()
-  aluno._id = aluno._id.toString()
+  await dbConnect();
+  const aluno = await Aluno.findById(params.id).lean();
+  aluno._id = aluno._id.toString();
 
-  return { props: { aluno } }
+  return { props: { aluno } };
 }

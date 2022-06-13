@@ -3,10 +3,8 @@ import Aluno from "../models/Aluno"
 import Head from "next/head"
 import Script from "next/script"
 import Card from "../components/Card"
+import Spinner from "../components/Spinner"
 import { useState } from "react"
-
-
-
 
 const Home = ({ data }) => {
   let isEmpty = false
@@ -19,6 +17,8 @@ const Home = ({ data }) => {
     email: String,
     telefone: String
   })
+
+  const [isLoading,setLoading] = useState(false)
 
   const handleChange = (e) => {
     const value = e.target.value
@@ -48,11 +48,6 @@ const Home = ({ data }) => {
     }
   }
 
-  function SomeScript(params) {
-    console.log('this is a secret embeded script')
-    return <h1> Hello {params.name} </h1>
-  }
-
   const handleSubmit = (e) => {
     e.preventDefault()
     postData(form)
@@ -61,21 +56,19 @@ const Home = ({ data }) => {
 
   const handleFirstLink = (e) => {
     e.preventDefault()
-    document.getElementById("spinner").removeAttribute("hidden")
     window.location.replace("/estatisticas")
+    setLoading(true)
   }
 
   const handleSecondLink = (e) => {
     e.preventDefault()
-    document.getElementById("spinner").removeAttribute("hidden")
     window.location.replace("/localizacoes")
+    setLoading(true)
   }
 
   if (data.length === 0) {
     isEmpty = true
   }
-
- 
 
   return (
     <>
@@ -242,11 +235,7 @@ const Home = ({ data }) => {
               Em tabela
             </button>
           </div>
-          <div className="col-12" hidden id="spinner">
-            <div className="spinner-border text-success" role="status">
-              <span className="visually-hidden">Loading...</span>
-            </div>
-          </div>
+          {isLoading ? <Spinner /> : ""}
         </div>
       </div>
 

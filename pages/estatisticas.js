@@ -83,22 +83,22 @@ export default function Estatisticas({ objetoNumeros }) {
 export async function getServerSideProps() {
   await dbConnect()
   const resultHomens = await Aluno.find({ sexo: "masculino" })
-  const data1 = resultHomens.map((doc) => {
-    const data1 = doc.toObject()
-    data1._id = data1._id.toString()
-    return data1
+  const dataHomens = resultHomens.map((doc) => {
+    const dataHomens = doc.toObject()
+    dataHomens._id = dataHomens._id.toString()
+    return dataHomens
   })
 
   const resultMulheres = await Aluno.find({ sexo: "feminino" })
-  const data = resultMulheres.map((doc) => {
-    const data = doc.toObject()
-    data._id = data._id.toString()
-    return data
+  const dataMulheres = resultMulheres.map((doc) => {
+    const dataMulheres = doc.toObject()
+    dataMulheres._id = dataMulheres._id.toString()
+    return dataMulheres
   })
 
   let objetoNumeros = {
-    numeroMulheres: data.length,
-    numeroHomens: data1.length
+    numeroMulheres: dataMulheres.length,
+    numeroHomens: dataHomens.length
   }
 
   return { props: { objetoNumeros } }

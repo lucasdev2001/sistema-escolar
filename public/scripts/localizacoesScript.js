@@ -7,8 +7,8 @@ let marker
 
 
 for (let index = 0; index < 4; index++) {
-    let randomLongitude = Math.random() * (-14 - -8) + -8
-    let randomLatitude = Math.random() * (-53 - -60) + -60
+    let randomLongitude = Math.random() * (-18 - -2) + -8
+    let randomLatitude = Math.random() * (-40 - -70) + -70
     
     let myIcon = L.icon({
         iconUrl: `/marcadores/marcador${index}.png`,

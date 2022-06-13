@@ -36,6 +36,7 @@ export default function Edit({ aluno }) {
         },
         body: JSON.stringify(form),
       });
+      window.location.replace("/");
     } catch (error) {
       console.log(error);
     }
@@ -44,7 +45,6 @@ export default function Edit({ aluno }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     putData(form);
-    window.location.replace("/");
   };
 
   const handleClick = () => {
